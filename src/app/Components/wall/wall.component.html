@@ -1,0 +1,37 @@
+<hr>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Görev..." (keyup.enter)="AddTodo(todoText)" #todoText>
+        <span class="input-group-btn" style="background-color:royalblue">
+        <button class="btn btn-default" type="button" style="color:seashell" (click)="AddTodo(todoText)" >Ekle!</button>
+       </span>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
+<hr>
+<div class="panel panel-default" *ngIf="todos.length; else mytemp" >
+  <div class="panel-heading" style="text-align:center" > <b>Yapılacaklar listem<br /><br /></b></div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Yapılacak</th>
+        <th>Eklenme Tarihi</th>
+        <th>Sil</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let todo of todos; let i = index"> 
+        <td>{{ i + 1 }}</td>
+        <td>{{ todo.text }}</td>
+        <td>{{ todo.createdAt | date: 'dd.MM.yyyy / hh:mm:ss'}}</td>
+        <td><button class="btn btn-danger" (click)="RemoveTodo(todo)" >Sil</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #mytemp>
+    <div class="alert alert-info" role="alert">Yapılacak İş Yok. Ekle</div>
+</ng-template>
